@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    networks:
+      - library-network
+  postgres:
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: YourStrong@Passw0rd
+    networks:
+      - library-network
+networks:
+  library-network:
+    driver: bridge
